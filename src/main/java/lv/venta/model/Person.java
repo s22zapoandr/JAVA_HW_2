@@ -1,33 +1,33 @@
-package model;
+package lv.venta.model;
 
-
+import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
-import jakarta.persistence.metamodel.SetAttribute;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @ToString
+@NoArgsConstructor
 @Table(name = "Person")
 @Entity
 
 public class Person {
+	@NotNull
+	@Column(name = "IDP")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long idP;
 	
-
 	@NotNull
 	@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	@Size(min = 2, max = 10)
@@ -46,24 +46,13 @@ public class Person {
 	@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	@Size(min = 2, max = 20)
 	@Column(name = "Person Code")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String personCode;
 	
-
-	public void setPersonCode(String personCode) {
-		if(personCode != null && personCode.matches("[0-9]{6}-[0-9]{5}")) {
-			this.personCode = personCode;
-		} else {
-			this.personCode = "Undefinied";
-		}
-	}
-		
-	public Person(String name, String surname, String personCode) {
-		setPersonCode(personCode);
-		setName(name);
+	public Person(String personCode, String name, String surname) {
+		setName(surname);
 		setSurname(surname);
+		setPersonCode(personCode);
 	}
-
 	
-
+	
 }
