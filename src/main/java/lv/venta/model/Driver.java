@@ -29,7 +29,7 @@ public class Driver{
 	@Column(name = "IdP")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idp;
+	private long idP;
 	
 	@NotNull
 	@Pattern(regexp = "[A-Z]{1}[a-z]+")
@@ -65,8 +65,6 @@ public class Driver{
 	@Size(min = 2, max = 20)
 	@Column(name = "License_number")
 	private String licenseNo;
-	
-	
 	
 
 	

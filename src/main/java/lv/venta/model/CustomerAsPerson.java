@@ -8,6 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -32,14 +34,11 @@ import lombok.ToString;
 public class CustomerAsPerson {
 	
 	@NotNull
-	@Column(name = "IDC")
+	@Column(name = "IDC2")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idC;
 	
-	@NotNull
-	@Column(name = "Address")
-	private Address address;
 	
 	@NotNull
 	@Column(name = "Phone_number")
@@ -47,7 +46,7 @@ public class CustomerAsPerson {
 	@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
 	private String phoneNo;
 	
-	private ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+
 	
 	@NotNull
 	@Column(name = "Customer_code")
@@ -78,9 +77,15 @@ public class CustomerAsPerson {
 	 
 	//Linkage 
 	
-	@OneToOne(mappedBy = "IDP")
-	@ToString.Exclude
-	private Driver driver;
+	@ManyToOne
+	@NotNull
+	@Column(name = "Address")
+	private Address address;
+	
+	
+	@OneToMany
+	private ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+	
 	
 	
 	//Override
@@ -98,7 +103,6 @@ public class CustomerAsPerson {
 		setCustomerCode();
 		setPhoneNo(phoneNo);
 		setAddress(address);
-		setDriver(driver);
 		
 		
 	}

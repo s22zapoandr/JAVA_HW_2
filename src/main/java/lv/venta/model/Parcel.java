@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
@@ -32,7 +34,7 @@ public class Parcel {
 	@Column(name = "Idpa")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long idpa;
+	private long idPa;
 	
 	
 	@NotNull
@@ -51,18 +53,24 @@ public class Parcel {
 	@Column(name = "Is_fragile")
 	private boolean isFragile;
 	
+	@NotNull
+	@Column(name = "Price")
+	@Min(1)
+	@Max(1000000)
+	private float price;
+	
 	//Linkage
 	
 	@ManyToOne
-	@JoinColumn(name = "IdC1") 
-	private CustomerAsPerson customerAsPerson;
-	
-	@ManyToOne
-	@JoinColumn(name = "IdC2")
+	@JoinColumn(name = "IDC1") 
 	private CustomerAsCompany customerAsCompany;
 	
 	@ManyToOne
-	@JoinColumn(name = "IdP")
+	@JoinColumn(name = "IDC2")
+	private CustomerAsPerson customerAsPerson;
+	
+	@ManyToOne
+	@JoinColumn(name = "IDP")
 	private Driver driver;
 
 	//Override
@@ -79,12 +87,43 @@ public class Parcel {
 		}
 	}
 	
+	public void setPrice() {
+		float counter = 0;
+		switch (getSize()) {
+        case X:
+            counter = 1.99f;
+            break;
+        case S:
+        	counter = 1.99f*2;
+            break;
+        case M:
+        	counter = 1.99f*3;
+            break;
+        case L:
+        	counter = 1.99f*4;
+            break;
+        case XL:
+        	counter = 1.99f*5;
+            break;
+        default:
+        	counter = 0;
+            break;
+    }
+		if(isFragile ) {
+			this.price = counter + 2.99f;
+		}
+		else {
+			this.price = counter;
+		}
+	}
+	
 	public Parcel(LocalDateTime orderCreated, LocalDateTime plannedDelivery, ParcelSize size, boolean isFragile, Driver driver) {
 		setOrderCreated();
 		setPlannedDelivery(plannedDelivery);
 		setSize(size);
 		setFragile(isFragile);
 		setDriver(driver);
+		setPrice();
 	}
 	
 	

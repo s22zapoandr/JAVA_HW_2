@@ -36,7 +36,7 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 		
 		if(!driverRepo.existsById(idP)) throw new Exception("Driver with id ("+idP+") does not exist");
 		
-		return driverRepo.findById(idP);
+		return driverRepo.findById(idP).get();
 		
 	}
 	

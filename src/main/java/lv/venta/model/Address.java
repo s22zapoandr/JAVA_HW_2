@@ -42,7 +42,7 @@ public class Address {
 	@Column(name = "Street/house title")
 	private String streetOrHouseTitle;
 	
-	@Column(name = "Experience in years")
+	@Column(name = "House_No")
 	@NotNull
 	@Min(1)
 	@Max(200)
