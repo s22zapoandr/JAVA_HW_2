@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.model.Parcel;
 import lv.venta.model.CustomerAsPerson;
+import lv.venta.model.City;
 import lv.venta.model.CustomerAsCompany;
 import lv.venta.model.Driver;
 import lv.venta.repo.IParcelRepo;
@@ -124,10 +125,30 @@ public class IParcelServiceImpl implements IParcelService {
         return parcelRepo.countParcelsToDeliverToday();
     }
     	
+    @Override
+    public ArrayList<Parcel> selectAllParcelsPriceLessThan(float price) throws Exception	{
+    	ArrayList<Parcel> result = parcelRepo.findAllParcelsByPriceLessThan(price);
+    	if(result.isEmpty()) throw new Exception("No parcel for price less then ("+price+") found is system");
+    	return result;
+    }
+    
+    @Override
     	
-    	
-    	
-    	
+    public ArrayList<Parcel> selectAllParcelsDeliveredToCity(City city) throws Exception{
+    	ArrayList<Parcel> result1 = parcelRepo.findAllParcelsByCustomerAsCompanyAddressCity(city);
+    	ArrayList<Parcel> result2 = parcelRepo.findAllParcelsByCustomerAsPersonAddressCity(city);
+    	if(result1.isEmpty()) {
+    		if(result2.isEmpty()) {
+    			throw new Exception("No parcels to be delivered to this city");
+    		}
+    		else {
+    			return result2;
+    		}
+    	}
+    	else {
+    		return result1;
+    	}
+    }
     	
     	
     	

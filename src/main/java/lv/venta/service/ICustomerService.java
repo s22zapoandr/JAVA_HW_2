@@ -10,6 +10,6 @@ public interface ICustomerService {
 
 	void insertNewCustomerAsCompany(CustomerAsCompany customer) throws Exception;
 
-	void addAddressToCustomerByCustomerId(String customerCode, Address address) throws Exception;
+	void addAddressToCustomerByCustomerId(Long cID, Address address) throws Exception;
 
 }

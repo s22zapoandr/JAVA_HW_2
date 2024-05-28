@@ -41,12 +41,12 @@ public class ICustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void addAddressToCustomerByCustomerId(String customerCode, Address address) throws Exception {
-        Optional<CustomerAsPerson> customer1 = capRepo.findByCustomerCode(customerCode);
-        Optional<CustomerAsCompany> customer2 = cacRepo.findByCustomerCode(customerCode);
+    public void addAddressToCustomerByCustomerId(Long cID, Address address) throws Exception {
+        Optional<CustomerAsPerson> customer1 = capRepo.findById(cID);
+        Optional<CustomerAsCompany> customer2 = cacRepo.findById(cID);
         if (!customer1.isPresent()) {
         	if(!customer2.isPresent()) {
-        		throw new Exception("Customer with code (" + customerCode + ") does not exist");
+        		throw new Exception("Customer with code (" + cID + ") does not exist");
         	}
         	else {
         		CustomerAsCompany existingCustomer = customer2.get();
