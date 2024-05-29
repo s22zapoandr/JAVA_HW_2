@@ -1,13 +1,14 @@
 package lv.venta.model;
 
 import java.util.ArrayList;
-
-import org.springframework.data.annotation.Id;
+import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -43,11 +44,11 @@ public class CustomerAsCompany {
 	@NotNull
 	@Column(name = "Phone_number")
 	@Size(min = 4, max = 20)
-	@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
+	//@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
 	private String phoneNo;
 	
 	
-	@NotNull
+	//@NotNull
 	@Column(name = "Customer_code")
 	@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
 	@Size(min = 4, max = 20)
@@ -62,7 +63,7 @@ public class CustomerAsCompany {
 	@NotNull
 	@Column(name = "Company_regestration_number")
 	@Size(min = 4, max = 20)
-	@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
+	//@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
 	private String companyRegNo;
 	
 	
@@ -70,11 +71,13 @@ public class CustomerAsCompany {
 	
 	@ManyToOne
 	@NotNull
-	@Column(name = "Address")
+	@JoinColumn(name = "IDA")
 	private Address address;
 	
-	@OneToMany
-	private ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+	@OneToMany(mappedBy = "customerAsCompany")
+	private Collection<Parcel> parcels = new ArrayList<Parcel>();
+	
+	
 	
 	//Override
 

@@ -1,11 +1,12 @@
 package lv.venta.model;
 
-import org.springframework.data.annotation.Id;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -43,13 +44,13 @@ public class Person {
 	
 
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	@Size(min = 2, max = 20)
 	@Column(name = "Person Code")
 	private String personCode;
 	
 	public Person(String personCode, String name, String surname) {
-		setName(surname);
+		setName(name);
 		setSurname(surname);
 		setPersonCode(personCode);
 	}

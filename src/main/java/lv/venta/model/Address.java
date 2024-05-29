@@ -1,11 +1,14 @@
 package lv.venta.model;
 
-import org.springframework.data.annotation.Id;
+
+import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -47,6 +50,13 @@ public class Address {
 	@Min(1)
 	@Max(200)
 	private int houseNo; 
+	
+	@OneToMany(mappedBy = "address")
+	private Collection<CustomerAsPerson> persons;
+	
+	@OneToMany(mappedBy = "address")
+	private Collection<CustomerAsCompany> companies;
+	
 	
 	public Address(City city, String streetOrHouseTitle, int houseNo) {
 		setCity(city);

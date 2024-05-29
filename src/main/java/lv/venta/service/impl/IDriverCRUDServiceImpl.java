@@ -21,7 +21,7 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 	@Override
 	
 	public ArrayList<Driver> selectAllDriver() throws Exception{
-		ArrayList<Driver> result = driverRepo.findAll();
+		ArrayList<Driver> result = (ArrayList<Driver>) driverRepo.findAll();
 		
 		if(result.isEmpty()) throw new Exception("There are no drivers");
 		
@@ -56,7 +56,7 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 		
 		if(!driverRepo.existsById(idP)) throw new Exception("Driver with id ("+idP+") does not exist");
 		
-		driverRepo.updateById(idP);
+		 //driverRepo.saveById(idP);
 	
 
 	}

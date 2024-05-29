@@ -46,7 +46,7 @@ public class Driver{
 	
 
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	@Size(min = 2, max = 20)
 	@Column(name = "Person Code")
 	private String personCode;
@@ -61,7 +61,7 @@ public class Driver{
 	
 	
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	@Size(min = 2, max = 20)
 	@Column(name = "License_number")
 	private String licenseNo;

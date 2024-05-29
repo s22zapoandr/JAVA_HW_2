@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Parcel</title>
+</head>
+<body>
+    <h1>Add Parcel</h1>
+	<form action="#" th:action="@{/customer/add/address/{customerid}(customerid=${customerid})}" th:object="${address}" method="post">
+			<table>
+				<tr>
+					<td>ID:</td>
+					<td> <input type="text" th:field="*{idP}" /> </td>
+					<td th:if="${#fields.hasErrors('idP')}" th:errors="*{idP}" ></td>
+				</tr>
+				<tr>
+					<td>Is Fragile:</td>
+					<td> <input type="text" th:field="*{isFragile}" /> </td>
+					<td th:if="${#fields.hasErrors('isFragile')}" th:errors="*{isFragile}" ></td>
+				</tr>
+				<tr>
+					<td>Order Created:</td>
+					<td> <input type="text" th:field="*{orderCreated}" /> </td>
+					<td th:if="${#fields.hasErrors('orderCreated')}" th:errors="*{orderCreated}" ></td>
+				</tr>
+				<tr>
+					<td>Planned Delivery:</td>
+					<td> <input type="text" th:field="*{plannedDelivery}" /> </td>
+					<td th:if="${#fields.hasErrors('plannedDelivery')}" th:errors="*{plannedDelivery}" ></td>
+				</tr>				
+				
+				<tr>
+					<td>Price:</td>
+					<td> <input type="text" th:field="*{price}" /> </td>
+					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}" ></td>
+				</tr>
+				<tr>
+					<td>Size:</td>
+					<td> <input type="text" th:field="*{parcelSize}" /> </td>
+					<td th:if="${#fields.hasErrors('parcelSize')}" th:errors="*{parcelSize}" ></td>
+				</tr>
+				<tr>
+					<td>IDC1:</td>
+					<td> <input type="text" th:field="*{customerAsCompany.getIdC()}" /> </td>
+					<td th:if="${#fields.hasErrors('customerAsCompany.getIdC()')}" th:errors="*{customerAsCompany.getIdC()}" ></td>
+				</tr>				
+				<tr>
+					<td>IDC2:</td>
+					<td> <input type="text" th:field="*{customerAsPerson.getIdC()}" /> </td>
+					<td th:if="${#fields.hasErrors('customerAsPerson.getIdC()')}" th:errors="*{customerAsPerson.getIdC()}" ></td>
+				</tr>						
+				<tr>
+					<td>IDP:</td>
+					<td> <input type="text" th:field="*{idP}" /> </td>
+					<td th:if="${#fields.hasErrors('idP')}" th:errors="*{idP}" ></td>
+				</tr>
+
+				<tr>
+					<td> <input type="submit" name="Save"/></td>
+				</tr>
+			</table>
+	</form>
+</body>
+</html>

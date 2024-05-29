@@ -1,5 +1,6 @@
 package lv.venta.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -36,20 +37,20 @@ public class IParcelServiceImpl implements IParcelService {
 
     @Override
     public ArrayList<Parcel> selectAllParcelsByCustomerId(Long idC) throws Exception{
-		ArrayList<Parcel> result = cacRepo.findParcelByIdC(idC);
-		ArrayList<Parcel> result1 = capRepo.findParcelByIdC(idC);
+		ArrayList<Parcel> result1 = parcelRepo.findParcelsByCustomerAsCompanyIdC(idC);
+		ArrayList<Parcel> result2 = parcelRepo.findParcelsByCustomerAsPersonIdC(idC);
 		if(idC < 0) throw new Exception("ID cannot be negative");
-		if(result.isEmpty()) {
+		if(result1.isEmpty()) {
 			if(result1.isEmpty()) {
 				throw new Exception("No customers with this ID found");
 			}
 			else {
-				return result1;
+				return result2;
 			}
 			
 		}
 		else{
-			return result;
+			return result1;
 		}
 	} 
     
@@ -59,7 +60,7 @@ public class IParcelServiceImpl implements IParcelService {
     		throw new Exception("Driver with id (" + idP + ") does not exist");
     	}
     	else {
-    		ArrayList<Parcel> result = parcelRepo.findAllById(idP);
+    		ArrayList<Parcel> result = parcelRepo.findByDriverIdP(idP);
     		return result;
     	}
     }
@@ -107,8 +108,8 @@ public class IParcelServiceImpl implements IParcelService {
 
     @Override
     public double calculateIncomeOfParcelsByCustomerId(Long idC) throws Exception {
-        ArrayList<Parcel> personParcels = parcelRepo.findAllParcelsByCustomerAsPersonidC(idC);
-        ArrayList<Parcel> companyParcels = parcelRepo.findAllParcelsByCustomerAsCompanyidC(idC);
+        ArrayList<Parcel> personParcels = parcelRepo.findParcelsByCustomerAsPersonIdC(idC);
+        ArrayList<Parcel> companyParcels = parcelRepo.findParcelsByCustomerAsCompanyIdC(idC);
 
         if (personParcels.isEmpty() && companyParcels.isEmpty()) {
             throw new Exception("No customers with this ID found");
@@ -122,12 +123,20 @@ public class IParcelServiceImpl implements IParcelService {
     	
     @Override
     public int calculateHowManyParcelsNeedToDeliverToday() throws Exception {
-        return parcelRepo.countParcelsToDeliverToday();
+        int counter = 0;
+        ArrayList<Parcel> parcels = (ArrayList<Parcel>) parcelRepo.findAll();
+        if(parcels.isEmpty()) throw new Exception("There are no parcels in the system");
+        for(Parcel tempP : parcels) {
+        	if(tempP.getPlannedDelivery().equals(LocalDate.now())) {
+        		counter++;
+        	}
+        }
+        return counter;
     }
     	
     @Override
     public ArrayList<Parcel> selectAllParcelsPriceLessThan(float price) throws Exception	{
-    	ArrayList<Parcel> result = parcelRepo.findAllParcelsByPriceLessThan(price);
+    	ArrayList<Parcel> result = parcelRepo.findByPriceLessThan(price);
     	if(result.isEmpty()) throw new Exception("No parcel for price less then ("+price+") found is system");
     	return result;
     }
@@ -135,8 +144,8 @@ public class IParcelServiceImpl implements IParcelService {
     @Override
     	
     public ArrayList<Parcel> selectAllParcelsDeliveredToCity(City city) throws Exception{
-    	ArrayList<Parcel> result1 = parcelRepo.findAllParcelsByCustomerAsCompanyAddressCity(city);
-    	ArrayList<Parcel> result2 = parcelRepo.findAllParcelsByCustomerAsPersonAddressCity(city);
+    	ArrayList<Parcel> result1 = parcelRepo.findParcelsByCustomerAsCompanyAddressCity(city);
+    	ArrayList<Parcel> result2 = parcelRepo.findParcelsByCustomerAsPersonAddressCity(city);
     	if(result1.isEmpty()) {
     		if(result2.isEmpty()) {
     			throw new Exception("No parcels to be delivered to this city");

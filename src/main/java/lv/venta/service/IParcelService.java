@@ -6,7 +6,8 @@ import lv.venta.model.City;
 import lv.venta.model.Parcel;
 
 public interface IParcelService {
-    ArrayList<Parcel> selectAllParcelsByCustomerId(Long customerId) throws Exception;
+	
+    ArrayList<Parcel> selectAllParcelsByCustomerId(Long idC) throws Exception;
 
     ArrayList<Parcel> selectAllParcelsDeliveredByDriverId(Long idP) throws Exception;
     

@@ -117,13 +117,23 @@ public class Parcel {
 		}
 	}
 	
-	public Parcel(LocalDateTime orderCreated, LocalDateTime plannedDelivery, ParcelSize size, boolean isFragile, Driver driver) {
+	public Parcel(LocalDateTime orderCreated, LocalDateTime plannedDelivery, ParcelSize size, boolean isFragile, Driver driver, CustomerAsCompany customerAsCompany) {
 		setOrderCreated();
 		setPlannedDelivery(plannedDelivery);
 		setSize(size);
 		setFragile(isFragile);
 		setDriver(driver);
 		setPrice();
+		setCustomerAsCompany(customerAsCompany);
+	}
+	public Parcel(LocalDateTime orderCreated, LocalDateTime plannedDelivery, ParcelSize size, boolean isFragile, Driver driver, CustomerAsPerson customerAsPerson) {
+		setOrderCreated();
+		setPlannedDelivery(plannedDelivery);
+		setSize(size);
+		setFragile(isFragile);
+		setDriver(driver);
+		setPrice();
+		setCustomerAsPerson(customerAsPerson);
 	}
 	
 	

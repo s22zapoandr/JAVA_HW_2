@@ -42,8 +42,8 @@ public class MyEparcelApplication {
 				addressRepo.save(a2);
 				
 				
-				CustomerAsCompany cac1 = new CustomerAsCompany(a1, "37124321", "HanzaMatrix", "LV41021245");
-				CustomerAsCompany cac2 = new CustomerAsCompany(a1, "37247120", "DianaSveces", "LT12401233");
+				CustomerAsCompany cac1 = new CustomerAsCompany(a1, "37124321", "Hanzamatrix", "LV41021245");
+				CustomerAsCompany cac2 = new CustomerAsCompany(a1, "37247120", "Dianasveces", "LT12401233");
 				cacRepo.save(cac1);
 				cacRepo.save(cac2);
 				
@@ -57,13 +57,13 @@ public class MyEparcelApplication {
 				driverRepo.save(d1);
 				driverRepo.save(d2);
 				
-				Parcel par1 = new Parcel();
-				Parcel par2 = new Parcel(LocalDateTime.of(2024, 04, 24, 14, 33, 48, 123456789), LocalDateTime.of(2024, 04, 30, 14, 33, 48, 123456789), ParcelSize.M, false , d1);
-				parcelRepo.save(par1);
+				//Parcel par1 = new Parcel();
+				Parcel par2 = new Parcel(LocalDateTime.of(2024, 04, 24, 14, 33, 48, 123456789), LocalDateTime.of(2024, 04, 30, 14, 33, 48, 123456789), ParcelSize.M, false , d1, cac1);
+				//parcelRepo.save(par1);
 				parcelRepo.save(par2);
 				
 				Person per1 = new Person("1242532", "John", "Smith");
-				Person per2 = new Person("1240432", "Armen", "Djigarhanyan");
+				Person per2 = new Person("1240432", "Armen", "Smith");
 				personRepo.save(per1);
 				personRepo.save(per2);
 				
