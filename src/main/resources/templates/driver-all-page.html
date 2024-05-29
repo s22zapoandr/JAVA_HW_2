@@ -16,14 +16,10 @@
         </thead>
         <tbody>
             <tr th:each="driver : ${drivers}">
-                <td th:text="${driver.idP}">1</td>
-                <td th:text="${driver.name}">John Doe</td>
-                <td th:text="${driver.licenseNumber}">12345</td>
-                <td>
-                    <a th:href="@{/driver/show/all/{idP}(idP=${driver.idP})}">View</a>
-                    <a th:href="@{/driver/update/{idP}(idP=${driver.idP})}">Edit</a>
-                    <a th:href="@{/driver/remove/{idP}(idP=${driver.idP})}">Delete</a>
-                </td>
+					<td  th:text="${driver.getIdP()}"></td>
+					<td  th:text="${driver.getName()}"></td>
+					<td  th:text="${driver.getSurname()}"></td>
+					<td  th:text="${driver.getLicenseNo()}"></td>
             </tr>
         </tbody>
     </table>

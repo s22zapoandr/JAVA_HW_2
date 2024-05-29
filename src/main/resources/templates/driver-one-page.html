@@ -5,9 +5,9 @@
 </head>
 <body>
     <h1>Driver Details</h1>
-    <p>ID: <span th:text="${driver.idP}">1</span></p>
-    <p>Name: <span th:text="${driver.name}">John Doe</span></p>
-    <p>License Number: <span th:text="${driver.licenseNumber}">12345</span></p>
+    <p>ID: <span th:text="${driver.getidP()}">1</span></p>
+    <p>Name: <span th:text="${driver.getName()}">John Doe</span></p>
+    <p>License Number: <span th:text="${driver.getLicenseNo()}">12345</span></p>
     <a href="/driver/show/all">Back to All Drivers</a>
 </body>
 </html>
