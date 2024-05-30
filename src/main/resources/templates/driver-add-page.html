@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Add Driver</h1>
-    <form action="#" th:action="@{/driver/add}" th:object="${driver}" method="post">
+    <form action="#" th:action="@{/driver/add}" th:object="${driver}" th:method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" th:field="*{name}" />
         <br/>

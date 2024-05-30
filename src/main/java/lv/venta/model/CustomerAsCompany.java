@@ -90,7 +90,6 @@ public class CustomerAsCompany {
 		setPhoneNo(phoneNumber);
 		setCompanyRegNo(companyRegNo);
 		setCustomerCode();
-		setParcels(getParcels());
 		setTitle(title);
 	}
 }

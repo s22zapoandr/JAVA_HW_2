@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Customer (Person)</title>
+</head>
+<body>
+    <p>Please insert new customer (person)!</p>
+
+    <form action="#" th:action="@{/customer/create/person}" th:object="${customerAsPerson}" th:method="post">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}" /></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+            </tr>
+            <tr>
+                <td>Surname:</td>
+                <td><input type="text" th:field="*{surname}" /></td>
+                <td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></td>
+            </tr>
+            <tr>
+                <td>Person Code:</td>
+                <td><input type="text" th:field="*{personCode}" /></td>
+                <td th:if="${#fields.hasErrors('personCode')}" th:errors="*{personCode}"></td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" th:field="*{phoneNo}" /></td>
+                <td th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"></td>
+            </tr>
+			<tr>
+			    <td>Customer_code:</td>
+			    <td><input type="text" th:field="*{customerCode}" /></td>
+			    <td th:if="${#fields.hasErrors('customerCode')}" th:errors="*{personCode}"></td>
+			</tr>
+			<tr>
+			    <td>Address:</td>
+			    <td><input type="text" th:field="*{address}" /></td>
+			    <td th:if="${#fields.hasErrors('address')}" th:errors="*{phoneNo}"></td>
+			</tr>
+            <tr>
+                <td><input type="submit" name="Save" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
