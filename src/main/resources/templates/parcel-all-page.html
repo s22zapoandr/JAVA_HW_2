@@ -30,9 +30,6 @@
                 <td th:text="${parcel.getSize()}">Size</td>
 				<td th:text="${parcel.getCustomerAsPerson().getIdC()}">IDC1</td>
 				<td th:text="${parcel.getCustomerAsCompany().getIdC()}">IDC2</td>
-                <td>
-                    <a th:href="@{/parcel/change/{parcelid}/{driverid}(parcelid=${parcel.id}, driverid=${parcel.driver.id})}">Change Driver</a>
-                </td>
             </tr>
         </tbody>
     </table>
