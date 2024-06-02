@@ -6,7 +6,7 @@
 <body>
     <p>Please insert new customer (person)!</p>
 
-    <form action="#" th:action="@{/customer/create/person}" th:object="${customerAsPerson}" th:method="post">
+    <form th:action="@{/customer/create/person}" th:object="${customerAsPerson}" th:method="post">
         <table>
             <tr>
                 <td>Name:</td>

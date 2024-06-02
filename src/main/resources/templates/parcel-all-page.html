@@ -23,13 +23,16 @@
         <tbody>
             <tr th:each="parcel : ${parcels}">
                 <td th:text="${parcel.getIdPa()}">ID</td>
-				<td th:text="${parcel.getIsFragile()}">Is Fragile</td>
+				<td th:text="${parcel.getFragile()}">Is Fragile</td>
                 <td th:text="${parcel.getOrderCreated()}">Order Created</td>
                 <td th:text="${parcel.getPlannedDelivery()}">Planned Delivery</td>
                 <td th:text="${parcel.getPrice()}">Price</td>
                 <td th:text="${parcel.getSize()}">Size</td>
 				<td th:text="${parcel.getCustomerAsPerson().getIdC()}">IDC1</td>
 				<td th:text="${parcel.getCustomerAsCompany().getIdC()}">IDC2</td>
+				<td>
+				    <a th:href="@{/driver/update/{driverid}(parcelid=${parcel.idPa}, driverid=${parcel.driver.idP})}">Change Driver</a>
+				</td>
             </tr>
         </tbody>
     </table>
