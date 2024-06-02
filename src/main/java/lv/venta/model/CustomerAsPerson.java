@@ -40,38 +40,29 @@ public class CustomerAsPerson {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idC;
 	
-	
-	@NotNull
+    @NotNull
     @Column(name = "Phone_number")
-	@Size(min = 4, max = 20)
-	//@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
-	private String phoneNo;
-	
+    @Size(min = 1, max = 8)
+    @Pattern(regexp = "\\d{1,8}")
+    private String phoneNo;
 
-	
-	//@NotNull
-	@Column(name = "Customer_code")
-	//@Pattern(regexp = "[A-Z]{1}[a-z]{1,20}")
-	@Size(min = 4, max = 20)
-	protected String customerCode;
-	
+    @Column(name = "Customer_code")
+    private String customerCode;
 
 	@NotNull
-	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
-	@Size(min = 2, max = 20)
+	@Pattern(regexp = "[0-9]{6}-[0-9]{5}")
+	@Size(min = 0, max = 12)
 	@Column(name = "Person_Code")
 	private String personCode;
-	
-	
+
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[A-Za-z ]{2,10}")
 	@Size(min = 2, max = 10)
 	@Column(name = "Name")
 	private String name;
-	
 
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[A-Za-z ]{2,20}")
 	@Size(min = 2, max = 20)
 	@Column(name = "Surname")
 	private String surname;
@@ -91,8 +82,8 @@ public class CustomerAsPerson {
 	
 	//Override
 
-	public String setCustomerCode() {
-		return "0_person_"+personCode;
+	public void setCustomerCode() {
+		this.customerCode = idC+"person"+personCode;
 	}
 	
 

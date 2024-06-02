@@ -32,24 +32,22 @@ public class Driver{
 	private long idP;
 	
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[0-9]{6}-[0-9]{5}")
+	@Size(min = 0, max = 12)
+	@Column(name = "Person_Code")
+	private String personCode;
+
+	@NotNull
+	@Pattern(regexp = "[A-Za-z ]{2,10}")
 	@Size(min = 2, max = 10)
 	@Column(name = "Name")
 	private String name;
-	
 
 	@NotNull
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[A-Za-z ]{2,20}")
 	@Size(min = 2, max = 20)
 	@Column(name = "Surname")
 	private String surname;
-	
-
-	@NotNull
-	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
-	@Size(min = 2, max = 20)
-	@Column(name = "Person Code")
-	private String personCode;
 	
 	
 	

@@ -42,28 +42,28 @@ public class MyEparcelApplication {
 				addressRepo.save(a2);
 				
 				
-				CustomerAsCompany cac1 = new CustomerAsCompany(a1, "37124321", "Hanzamatrix", "LV41021245");
-				CustomerAsCompany cac2 = new CustomerAsCompany(a1, "37247120", "Dianasveces", "LT12401233");
+				CustomerAsCompany cac1 = new CustomerAsCompany(a1, "37123214", "Hanza Matrix", "LV41021245");
+				CustomerAsCompany cac2 = new CustomerAsCompany(a1, "37247201", "Dianasveces", "LT12401233");
 				cacRepo.save(cac1);
 				cacRepo.save(cac2);
 				
-				CustomerAsPerson cap1 = new CustomerAsPerson("Andrii", "Zaporozhets","4214141", a2, "421432131");
-				CustomerAsPerson cap2 = new CustomerAsPerson("Anton", "Volkov", "213123", a2, "21421342");
+				CustomerAsPerson cap1 = new CustomerAsPerson("Andrii", "Zaporozhets","421714-14132", a2, "4214331");
+				CustomerAsPerson cap2 = new CustomerAsPerson("Anton", "Volkov", "213124-91673", a2, "2142192");
 				capRepo.save(cap1);
 				capRepo.save(cap2);
 				
-				Driver d1 = new Driver("Igors", "Goncarovs", "1241231", "LT23541", 5.7f);
-				Driver d2 = new Driver("Peter", "Steele", "1241241", "US12431", 10.0f);
+				Driver d1 = new Driver("Igors", "Goncarovs", "183456-25705", "LT23541", 5.7f);
+				Driver d2 = new Driver("Peter", "Steele", "124112-31471", "US12431", 10.0f);
 				driverRepo.save(d1);
 				driverRepo.save(d2);
 				
-				//Parcel par1 = new Parcel();
+				Parcel par1 = new Parcel(LocalDateTime.of(2024, 04, 29, 14, 33, 48, 123456789), LocalDateTime.of(2024, 05, 01, 14, 33, 48, 123456789), ParcelSize.XL, true , d2, cac2);
 				Parcel par2 = new Parcel(LocalDateTime.of(2024, 04, 24, 14, 33, 48, 123456789), LocalDateTime.of(2024, 04, 30, 14, 33, 48, 123456789), ParcelSize.M, false , d1, cac1);
-				//parcelRepo.save(par1);
+				parcelRepo.save(par1);
 				parcelRepo.save(par2);
 				
-				Person per1 = new Person("1242532", "John", "Smith");
-				Person per2 = new Person("1240432", "Armen", "Smith");
+				Person per1 = new Person("124253-41432", "John", "Smith");
+				Person per2 = new Person("124043-83752", "Armen", "Smith");
 				personRepo.save(per1);
 				personRepo.save(per2);
 				
