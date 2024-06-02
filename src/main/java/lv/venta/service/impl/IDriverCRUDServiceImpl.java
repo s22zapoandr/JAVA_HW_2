@@ -40,6 +40,8 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 		
 	}
 	
+	@Override
+	
 	public void deleteDriverById(Long idP) throws Exception{
 		
 		if(idP < 1) throw new Exception("Id should be positive");
@@ -49,6 +51,7 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 		 driverRepo.deleteById(idP);
 	}
 	
+	@Override
 	
 	public void updateDriverById(Long idP, String name, String surname, String personCode, String licenseNo, float experienceInYears) throws Exception{
 		
@@ -56,17 +59,32 @@ public class IDriverCRUDServiceImpl implements IDriverCRUDService {
 		
 		if(!driverRepo.existsById(idP)) throw new Exception("Driver with id ("+idP+") does not exist");
 		
-		 //driverRepo.saveById(idP);
-	
-
-	}
-	public void insertNewDriver(Driver newDriver) {
-
-		driverRepo.save(newDriver);
+		Optional<Driver> updateDriver = driverRepo.findById(idP);
 		
+		updateDriver.get().setName(surname);
+		updateDriver.get().setSurname(surname);	
+		updateDriver.get().setPersonCode(personCode);
+		updateDriver.get().setLicenseNo(licenseNo);
+		updateDriver.get().setExperienceInYears(experienceInYears);
+		
+		driverRepo.save(updateDriver.get());
 	}
 	
+	@Override
+	
+	public void insertNewDriver(String name, String surname, String personCode, String licenseNo, float experienceInYears)throws Exception {
+		if (name == null || surname == null || personCode == null || licenseNo == null|| experienceInYears < 0)
+			throw new Exception("Problems with input params");
 
+
+		Driver newDriver = new Driver(name, surname, personCode, licenseNo, experienceInYears);
+		driverRepo.save(newDriver);
+
+	}
+	
+	
+	
+	
 	
 	
 	

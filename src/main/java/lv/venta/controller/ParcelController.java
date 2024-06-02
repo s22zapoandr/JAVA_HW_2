@@ -20,7 +20,7 @@ public class ParcelController {
 
 
     @GetMapping("/show/customer/{idC}")
-    public String getAllParcelsByCustomerIdc(@PathVariable Long idC, Model model) {
+    public String getAllParcelsByCustomerIdc(@PathVariable("idC") Long idC, Model model) {
         try {
         	ArrayList<Parcel> parcels = parcelService.selectAllParcelsByCustomerId(idC);
             model.addAttribute("parcels", parcels);
@@ -33,7 +33,7 @@ public class ParcelController {
 
 
     @GetMapping("/show/driver/{idP}")
-    public String getAllParcelsDeliveredByDriverIdp(@PathVariable Long idP, Model model) {
+    public String getAllParcelsDeliveredByDriverIdp(@PathVariable("idP") Long idP, Model model) {
         try {
             ArrayList<Parcel> parcels = parcelService.selectAllParcelsDeliveredByDriverId(idP);
             model.addAttribute("parcels", parcels);
@@ -46,7 +46,7 @@ public class ParcelController {
 
  
     @GetMapping("/show/price/{threshold}")
-    public String getAllParcelsPriceLessThan(@PathVariable float threshold, Model model) {
+    public String getAllParcelsPriceLessThan(@PathVariable("threshold") float threshold, Model model) {
         try {
             ArrayList<Parcel> parcels = parcelService.selectAllParcelsPriceLessThan(threshold);
             model.addAttribute("parcels", parcels);
@@ -59,7 +59,7 @@ public class ParcelController {
 
 
     @GetMapping("/show/city/{cityparam}")
-    public String getAllParcelsDeliveredToCity(@PathVariable City cityparam, Model model) {
+    public String getAllParcelsDeliveredToCity(@PathVariable("cityparam") City cityparam, Model model) {
         try {
             ArrayList<Parcel> parcels = parcelService.selectAllParcelsDeliveredToCity(cityparam);
             model.addAttribute("parcels", parcels);
@@ -71,14 +71,14 @@ public class ParcelController {
     }
 
 
-    @GetMapping("/add/{customercode}/{idP}")
+    @GetMapping("/add/{customerCode}/{idP}")
     public String getParcelForm(@PathVariable String customerCode, @PathVariable Long idP, Model model) {
         model.addAttribute("parcel", new Parcel());
         return "parcel-add-page";
     }
 
-    @PostMapping("/add/{customercode}/{driverid}")
-    public String addNewParcel(@PathVariable String customerCode, @PathVariable Long idP, @ModelAttribute Parcel parcel, Model model) {
+    @PostMapping("/add/{customerCode}/{idP}")
+    public String addNewParcel(@PathVariable("customerCode") String customerCode, @PathVariable("idP") Long idP, @ModelAttribute Parcel parcel, Model model) {
         try {
             parcelService.insertNewParcelByCustomerCodeAndDriverId(customerCode, idP, parcel);
             if(parcel.getCustomerAsCompany().equals(null)) {
@@ -95,7 +95,7 @@ public class ParcelController {
 
 
     @GetMapping("/change/{idPa}/{idP}")
-    public String changeParcelDriver(@PathVariable Long idPa, @PathVariable Long idP, Model model) {
+    public String changeParcelDriver(@PathVariable("idPa") Long idPa, @PathVariable("idP") Long idP, Model model) {
         try {
             parcelService.changeParcelDriverByParcelIdAndDriverId(idPa, idP);
             return "redirect:/parcel/show/driver/" + idP;
@@ -107,7 +107,7 @@ public class ParcelController {
 
 
     @GetMapping("/calculate/income/{cId}")
-    public String calculateIncomeOfParcelsByCustomerIdc(@PathVariable Long cId, Model model) {
+    public String calculateIncomeOfParcelsByCustomerIdc(@PathVariable("cId") Long cId, Model model) {
         try {
             double income = parcelService.calculateIncomeOfParcelsByCustomerId(cId);
             model.addAttribute("income", income);

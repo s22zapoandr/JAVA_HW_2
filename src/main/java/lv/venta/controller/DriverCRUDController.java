@@ -32,7 +32,7 @@ public class DriverCRUDController {
 
 
     @GetMapping("/show/all/{idP}")
-    public String getDriverById(@PathVariable Long idP, Model model) {
+    public String getDriverById(@PathVariable("idP") Long idP, Model model) {
         try {
             Driver driver = driverService.selectDriverById(idP);
             model.addAttribute("driver", driver);
@@ -45,7 +45,7 @@ public class DriverCRUDController {
 
 
     @GetMapping("/remove/{idP}")
-    public String removeDriverById(@PathVariable Long idP, Model model) {
+    public String removeDriverById(@PathVariable("idP") Long idP, Model model) {
         try {
             driverService.deleteDriverById(idP);
             return "redirect:/driver/show/all";
@@ -63,9 +63,9 @@ public class DriverCRUDController {
     }
 
     @PostMapping("/add")
-    public String addDriver(@ModelAttribute Driver driver, Model model) {
+    public String addDriver(@ModelAttribute String name, String surname, String personCode, String licenseNo, float experienceInYears, Model model) {
         try {
-            driverService.insertNewDriver(driver);
+            driverService.insertNewDriver(name, surname, personCode, licenseNo, experienceInYears);
             return "redirect:/driver/show/all";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
@@ -75,7 +75,7 @@ public class DriverCRUDController {
 
    
     @GetMapping("/update/{idP}")
-    public String getUpdateDriverForm(@PathVariable Long idP, Model model) {
+    public String getUpdateDriverForm(@PathVariable("idP") Long idP, Model model) {
         try {
             Driver driver = driverService.selectDriverById(idP);
             model.addAttribute("driver", driver);
@@ -87,7 +87,7 @@ public class DriverCRUDController {
     }
 
     @PostMapping("/update/{idP}")
-    public String updateDriverById(@PathVariable Long idP, String name, String surname, String personCode, String licenseNo, float experienceInYears, Model model) {
+    public String updateDriverById(@PathVariable("idP") Long idP, String name, String surname, String personCode, String licenseNo, float experienceInYears, Model model) {
         try {
             driverService.updateDriverById(idP, name,  surname,  personCode,  licenseNo,  experienceInYears);
             return "redirect:/driver/show/all";

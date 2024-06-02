@@ -54,14 +54,14 @@ public class CustomerController {
 
 
     @GetMapping("/add/address/{cID}")
-    public String getAddressForm(@PathVariable Long cID, Model model) {
+    public String getAddressForm(@PathVariable("cID") Long cID, Model model) {
         model.addAttribute("address", new Address());
         model.addAttribute("customerid", cID);
         return "customer-add-address-page";
     }
 
     @PostMapping("/add/address/{cID}")
-    public String addAddressToCustomer(@PathVariable Long cID, @ModelAttribute Address address, Model model) {
+    public String addAddressToCustomer(@PathVariable("cID")  Long cID, @ModelAttribute Address address, Model model) {
         try {
             customerService.addAddressToCustomerByCustomerId(cID, address);
             return "redirect:/customer/add/address/" + cID;
